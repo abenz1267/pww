@@ -21,13 +21,19 @@ func autopause(players []string) {
 		go watchStatus(v, statusChan)
 	}
 
+	stopped := ""
+
 	for val := range statusChan {
 		if val.status == "Playing" {
 			for p, s := range status {
 				if s == "Playing" {
+					stopped = p
 					pause(p)
 				}
 			}
+		} else if val.player != stopped && stopped != "" {
+			play(stopped)
+			stopped = ""
 		}
 
 		status[val.player] = val.status
