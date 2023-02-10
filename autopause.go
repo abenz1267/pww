@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"os/exec"
 	"strings"
-	"time"
 )
 
 type PlayerStatus struct {
@@ -35,9 +34,9 @@ func autopause(players []string) {
 				}
 			}
 		} else if val.player != stopped && stopped != "" {
-			time.Sleep(1 * time.Second)
+			s := status(stopper)
 
-			if status(stopper) != "Playing" {
+			if s != "Playing" && s != "Paused" {
 				play(stopped)
 				stopped = ""
 				stopper = ""
