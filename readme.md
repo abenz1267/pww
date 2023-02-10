@@ -1,6 +1,6 @@
 # PWW = Playerctl Waybar Wrapper
 
-This is a simple program that emits a json with artist or title info you can use in waybar. Additionally you can let it auto-pause media players you provide, f.e. starting a video in your browser will pause spotify.
+This is a simple program that emits a json with metadata info you can use in f.e. [Waybar](https://github.com/Alexays/Waybar). Additionally you can let it auto-pause media players you provide, f.e. starting a video in your browser will pause spotify.
 
 ## Install
 
@@ -8,12 +8,13 @@ This is a simple program that emits a json with artist or title info you can use
 
 ## Usage
 
-`pww -a firefox,spotify` will auto-pause/resume watching both Firefox and Spotify.
-`pww -w spotify:title` will emit a json with the current spotify title and the Spotify status as a class. so `{"class": "Playing", "text": "Some Title"}`
+| command                           | description                                                                      | example                                                                            |
+| --------------------------------- | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| `pww -a <players>`                | will launch a daemon monitoring given players in order to auto-pause/resume them | `pww -a spotify,firefox`                                                           |
+| `pww -w <player>:<metadata info>` | will watch for changes and print them to stdout                                  | `pww -w spotify:title` will emit f.e. `{"class": "Playing", "text": "Some Title"}` |
+| `pww -t <player>`                 | will play/pause given player, launch it if it's not running at all               | `pww -t spotify`                                                                   |
 
 Additionally a `-p` flag can be provided to specify a placeholder for empty text. F.e. when the player isn't running.
-
-You can use `-t <player>` to toggle the playing state of the given player. If not present, the player will get launched.
 
 ### Waybar Example
 
