@@ -16,6 +16,19 @@ func play(player string) {
 	cmd.Run()
 }
 
+func toggleOrStart(player string) {
+	s := status(player)
+
+	if s != "Playing" && s != "Paused" {
+		cmd := exec.Command("spotify")
+		cmd.Start()
+		return
+	}
+
+	cmd := exec.Command("playerctl", fmt.Sprintf("--player=%s", player), "play-pause")
+	cmd.Start()
+}
+
 func status(player string) string {
 	cmd := exec.Command("playerctl", fmt.Sprintf("--player=%s", player), "status")
 	out, err := cmd.Output()
