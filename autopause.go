@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"os/exec"
 	"strings"
+	"time"
 )
 
 type PlayerStatus struct {
@@ -15,28 +16,35 @@ type PlayerStatus struct {
 func autopause(players []string) {
 	statusChan := make(chan PlayerStatus)
 
-	status := map[string]string{}
+	playerStatus := map[string]string{}
 
 	for _, v := range players {
 		go watchStatus(v, statusChan)
 	}
 
 	stopped := ""
+	stopper := ""
 
 	for val := range statusChan {
 		if val.status == "Playing" {
-			for p, s := range status {
+			for p, s := range playerStatus {
 				if s == "Playing" {
 					stopped = p
+					stopper = val.player
 					pause(p)
 				}
 			}
 		} else if val.player != stopped && stopped != "" {
-			play(stopped)
-			stopped = ""
+			time.Sleep(1 * time.Second)
+
+			if status(stopper) != "Playing" {
+				play(stopped)
+				stopped = ""
+				stopper = ""
+			}
 		}
 
-		status[val.player] = val.status
+		playerStatus[val.player] = val.status
 	}
 }
 
