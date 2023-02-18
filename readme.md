@@ -6,6 +6,10 @@ This is a simple program that emits a json with metadata info you can use in f.e
 
 `go install github.com/abenz1267/pww@latest`
 
+Don't forget to add the `bin` folder of your `GOPATH` to your `PATH`.
+
+`export PATH=$PATH:$(go env GOPATH)/bin`
+
 ## Usage
 
 | command                           | description                                                                      | example                                                                            |
