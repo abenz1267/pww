@@ -4,7 +4,19 @@ This is a simple program that emits a json with metadata info you can use in f.e
 
 ## Install
 
+### Download binary
+
+Simply download a pre-built binary from the [release page](https://github.com/abenz1267/pww/releases)
+
+### With Go
+
+Regular `GOBIN` folder (make sure it's in your `PATH`):
 `go install github.com/abenz1267/pww@latest`
+
+Install to custom location:
+`GOBIN=<custom location> go install github.com/abenz1267/pww@latest`
+
+f.e. `sudo GOBIN=/usr/bin/ go install github.com/abenz1267/pww@latest`
 
 ## Usage
 
