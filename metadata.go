@@ -9,10 +9,10 @@ import (
 	"time"
 )
 
-func watchPlayerMetaData(player, data, placeholder string) {
+func watchPlayerMetaData(player, data, placeholder, format string) {
 	infoChannel := make(chan string)
 
-	go watchMetaData(player, data, infoChannel)
+	go watchMetaData(player, data, format, infoChannel)
 	go watchMetaDataStatus(player, infoChannel)
 
 	s := status(player)
@@ -37,7 +37,7 @@ func watchPlayerMetaData(player, data, placeholder string) {
 		if val == "STATUSCHANGED" {
 			s = status(player)
 			time.Sleep(100 * time.Millisecond)
-			text = metadata(player, data)
+			text = metadata(player, data, format)
 		} else {
 			text = val
 		}
@@ -60,8 +60,13 @@ func watchPlayerMetaData(player, data, placeholder string) {
 	}
 }
 
-func watchMetaData(player, data string, infoChannel chan string) {
-	cmd := exec.Command("playerctl", fmt.Sprintf("--player=%s", player), "metadata", data, "-F")
+func watchMetaData(player, data, format string, infoChannel chan string) {
+	params := []string{fmt.Sprintf("--player=%s", player), "metadata", data, "-F"}
+	if format != "" {
+		params = append(params, "-f", format)
+	}
+
+	cmd := exec.Command("playerctl", params...)
 
 	pipe, err := cmd.StdoutPipe()
 	if err != nil {
