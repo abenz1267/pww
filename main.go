@@ -35,13 +35,24 @@ func main() {
 		return
 	}
 
-	if watch == "" {
-		return
+	player := ""
+	data := ""
+
+	if watch != "" {
+		info := strings.Split(watch, ":")
+		player = info[0]
+		// data could be empty when using a custom format
+		if len(info) > 1 {
+			data = info[1]
+			// if data is empty, format should be provided
+		} else if format == "" {
+			return
+		}
 	}
 
-	info := strings.Split(watch, ":")
-	player := info[0]
-	data := info[1]
+	if player == "" {
+		return
+	}
 
 	watchPlayerMetaData(player, data, placeholder, format)
 }

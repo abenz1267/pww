@@ -28,7 +28,7 @@ f.e. `sudo GOBIN=/usr/bin/ go install github.com/abenz1267/pww@latest`
 
 Additionally a `-p` flag can be provided to specify a placeholder for empty text. F.e. when the player isn't running.
 
-You can also provide `-f` flag to specify the format of the text output. F.e. `pww -w spotify:title -f '{{title}} - {{artist}}'` will emit `{"class": "Playing", "text": "Song Title - Artist Name"}`. You can find more information about supported formats [here](https://github.com/altdesktop/playerctl#printing-properties-and-metadata).
+You can also provide `-f` flag to specify the format of the text output. F.e. `pww -w spotify -f '{{title}} - {{artist}}'` will emit `{"class": "Playing", "text": "Song Title - Artist Name"}`. You can find more information about supported formats [here](https://github.com/altdesktop/playerctl#printing-properties-and-metadata).
 
 ### Waybar Example
 
