@@ -39,8 +39,13 @@ func status(player string) string {
 	return strings.TrimSpace(string(out))
 }
 
-func metadata(player, data string) string {
-	cmd := exec.Command("playerctl", fmt.Sprintf("--player=%s", player), "metadata", data)
+func metadata(player, data, format string) string {
+	params := []string{fmt.Sprintf("--player=%s", player), "metadata", data}
+	if format != "" {
+		params = append(params, "-f", format)
+	}
+
+	cmd := exec.Command("playerctl", params...)
 
 	out, err := cmd.CombinedOutput()
 	if err != nil {
