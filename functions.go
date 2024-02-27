@@ -19,8 +19,17 @@ func play(player string) {
 func toggleOrStart(player string) {
 	s := status(player)
 
+	cmds := make(map[string]string)
+	cmds["YoutubeMusic"] = "youtube-music"
+
 	if s != "Playing" && s != "Paused" {
-		cmd := exec.Command("spotify")
+		toExec := player
+
+		if val, exists := cmds[player]; exists {
+			toExec = val
+		}
+
+		cmd := exec.Command(toExec)
 		cmd.Start()
 		return
 	}
