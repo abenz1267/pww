@@ -4,6 +4,8 @@ This is a simple program that emits a json with metadata info you can use in f.e
 
 ## Install
 
+Arch: `yay -S bmv-bin`
+
 ### Download binary
 
 Simply download a pre-built binary from the [release page](https://github.com/abenz1267/pww/releases)
