@@ -4,7 +4,7 @@ This is a simple program that emits a json with metadata info you can use in f.e
 
 ## Install
 
-Arch: `yay -S bmv-bin`
+Arch: `yay -S pww-bin`
 
 ### Download binary
 
